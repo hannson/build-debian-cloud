@@ -1,0 +1,12 @@
+#!/bin/bash
+# Bundle of instance image
+
+bundledir=${debootstrap_dir}/${volume_id}-bundle
+mkdir $bundledir
+
+ami_name="$distribution-$codename-$arch-$name_suffix"
+
+euca-bundle-image -i $imagefile -d $bundledir -p "${ami_name}"
+if [ $? -ne 0 ]; then
+  die "Unable to bundle instance image."
+fi
